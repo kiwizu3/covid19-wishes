@@ -45,7 +45,6 @@
 
     $(document).ready(function () {
         $.get("https://api.shoutout.ai/covidresponse/greetings", function (data, status) {
-            // console.log(data);
             if (data.length > 0) {
                 $.each(data, function (index, wish) {
                     document.getElementById("mydiv").innerHTML += "<div  id='" + index + "' class='card border-0 rounded-0 shadow p-4 mb-3'><p class='mb-0'>" + wish + "</p></div>";
@@ -74,9 +73,6 @@
         }
         if (counter === 3) {
             counter = 0;
-            // clearInterval(i)
-            console.log("TimerEnd", counter);
-
         }
     };
 
