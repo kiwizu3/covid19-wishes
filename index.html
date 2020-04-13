@@ -17,14 +17,17 @@
                 <img src="images/header-main.png" class="img-fluid" />
             </div>
             <div class="col-md-6 col-sm-12 my-auto order-lg-1">
-                <h1 id='text-english' class='mb-0 text-lg-left text-center text-english d-none'>"We are all home for the <strong>New Year</strong>. They are NOT!"</h1>
-                <h1 id='text-sinhala' class="mb-0 text-lg-left text-center ">"අපි හැමෝම අවුරුද්දට ගෙදර උනාට, එයාලා හැමෝම වැඩ"</h1>
-                <h2 id='text-tamil' class='mb-0 text-lg-left text-center font-weight-bold d-none'>"இந்தப் புத்தாண்டில் நாங்கள் அனைவரும் வீட்டில். ஆனால் அவர்கள் அனைவரும் சேவையில்!"</h2>
+                <h1 id='text-english' class='mb-0 text-lg-left text-center text-english d-none'>"We are all home for the
+                    <strong>New Year</strong>. They are NOT!"</h1>
+                <h1 id='text-sinhala' class="mb-0 text-lg-left text-center ">"අපි හැමෝම අවුරුද්දට ගෙදර උනාට, එයාලා හැමෝම
+                    වැඩ"</h1>
+                <h2 id='text-tamil' class='mb-0 text-lg-left text-center font-weight-bold d-none'>"இந்தப் புத்தாண்டில்
+                    நாங்கள் அனைவரும் வீட்டில். ஆனால் அவர்கள் அனைவரும் சேவையில்!"</h2>
 
 
             </div>
         </div>
-        <div class="row justify-content-center" id='mydiv'>
+        <div class="card-columns" id='mydiv'>
         </div>
         <div class="row justify-content-center">
             <div class="col">
@@ -42,38 +45,42 @@
 
     $(document).ready(function () {
         $.get("https://api.shoutout.ai/covidresponse/greetings", function (data, status) {
-            console.log(data);
+            // console.log(data);
             if (data.length > 0) {
                 $.each(data, function (index, wish) {
-                    document.getElementById("mydiv").innerHTML += "<div  id='" + index + "' class='col-md-4 col-sm-10 col-xs-12 mb-3'><div class='card border-0 rounded-0 shadow p-4'><p class='mb-0'>" + wish + "</p></div></div>";
+                    document.getElementById("mydiv").innerHTML += "<div  id='" + index + "' class='card border-0 rounded-0 shadow p-4 mb-3'><p class='mb-0'>" + wish + "</p></div>";
                 })
             }
         })
     })
-        var counter = 0;
-        var i = setInterval(function () {
-            console.log("Timer", counter);
-           if(counter <= 2){
-            if(counter===0){
-            $('#text-sinhala').addClass('d-none')
-            $("#text-tamil").removeClass('d-none');
-           }
-           if(counter===1){
-            $('#text-tamil').addClass('d-none')
-            $("#text-english").removeClass('d-none');
-           }
-           if(counter===2){
-            $('#text-english').addClass('d-none')
-            $("#text-sinhala").removeClass('d-none');
-           }
-           counter++;
-           }
-           if(counter === 3) {
-               counter = 0;
-               clearInterval(i) 
-           }
-        
-        }, 1000);
+
+    var counter = 0;
+    function headerChanger() {
+        console.log("Timer", counter);
+        if (counter <= 2) {
+            if (counter === 0) {
+                $('#text-sinhala').addClass('d-none')
+                $("#text-tamil").removeClass('d-none');
+            }
+            if (counter === 1) {
+                $('#text-tamil').addClass('d-none')
+                $("#text-english").removeClass('d-none');
+            }
+            if (counter === 2) {
+                $('#text-english').addClass('d-none')
+                $("#text-sinhala").removeClass('d-none');
+            }
+            counter++;
+        }
+        if (counter === 3) {
+            counter = 0;
+            // clearInterval(i)
+            console.log("TimerEnd", counter);
+
+        }
+    };
+
+    setInterval(headerChanger, 2500);
 </script>
 
 </html>
