@@ -17,16 +17,21 @@
                 <img src="images/header-main.png" class="img-fluid" />
             </div>
             <div class="col-md-6 col-sm-12 my-auto order-lg-1">
-                <h1 class="mb-4 text-lg-left text-center">"අපි හැමෝම අවුරුද්දට ගෙදර උනාට, එයාලා හැමෝම වැඩ"</h1>
+                <h1 id='text-english' class='mb-0 text-lg-left text-center text-english d-none'>"We are all home for the <strong>New Year</strong>. They are NOT!"</h1>
+                <h1 id='text-sinhala' class="mb-0 text-lg-left text-center ">"අපි හැමෝම අවුරුද්දට ගෙදර උනාට, එයාලා හැමෝම වැඩ"</h1>
+                <h2 id='text-tamil' class='mb-0 text-lg-left text-center font-weight-bold d-none'>"இந்தப் புத்தாண்டில் நாங்கள் அனைவரும் வீட்டில். ஆனால் அவர்கள் அனைவரும் சேவையில்!"</h2>
+
+
             </div>
         </div>
         <div class="row justify-content-center" id='mydiv'>
         </div>
         <div class="row justify-content-center">
             <div class="col">
-               <div class="m-3 p-3 d-flex justify-content-center align-items-center">
-                <p class="mb-0 mr-2 font-weight-bold">Powered by</p> <img src="images/shoutout-logo.svg" class="img-fluid" />
-               </div>
+                <div class="m-3 p-3 d-flex justify-content-center align-items-center">
+                    <p class="mb-0 mr-2 font-weight-bold">Powered by</p> <img src="images/shoutout-logo.svg"
+                        class="img-fluid" />
+                </div>
             </div>
         </div>
     </div>
@@ -35,18 +40,40 @@
 <script>
 
 
-    $(document).ready(function getWish() {
-        $.get("https://5e94014dc7393c0016de4c8e.mockapi.io/wishes", function (data, status) {
+    $(document).ready(function () {
+        $.get("https://api.shoutout.ai/covidresponse/greetings", function (data, status) {
             console.log(data);
             if (data.length > 0) {
                 $.each(data, function (index, wish) {
-                document.getElementById("mydiv").innerHTML += "<div  id='" + index + "' class='col-md-4 col-sm-10 col-xs-12 mb-3'><div class='card border-0 rounded-0 shadow p-4'><small>" + wish.name + "</small><p class='mb-0'>" + wish.wish + "</p></div></div>";
-            })
+                    document.getElementById("mydiv").innerHTML += "<div  id='" + index + "' class='col-md-4 col-sm-10 col-xs-12 mb-3'><div class='card border-0 rounded-0 shadow p-4'><p class='mb-0'>" + wish + "</p></div></div>";
+                })
             }
         })
     })
-
-
+        var counter = 0;
+        var i = setInterval(function () {
+            console.log("Timer", counter);
+           if(counter <= 2){
+            if(counter===0){
+            $('#text-sinhala').addClass('d-none')
+            $("#text-tamil").removeClass('d-none');
+           }
+           if(counter===1){
+            $('#text-tamil').addClass('d-none')
+            $("#text-english").removeClass('d-none');
+           }
+           if(counter===2){
+            $('#text-english').addClass('d-none')
+            $("#text-sinhala").removeClass('d-none');
+           }
+           counter++;
+           }
+           if(counter === 3) {
+               counter = 0;
+               clearInterval(i) 
+           }
+        
+        }, 1000);
 </script>
 
 </html>
